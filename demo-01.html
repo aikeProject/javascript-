@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01</title>
+    <script src="js/jquery-3.4.1.js"></script>
+    <!--    <script src="./js/velocity.min.js"></script>-->
+    <!--    <script src="./js/velocity.ui.js"></script>-->
+    <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.ui.min.js"></script>
+    <!--    <script src="https://julian.com/research/velocity/vmd.min.js"></script>-->
+    <style>
+        #move {
+            width: 100px;
+            height: 100px;
+            background: red;
+            border-radius: 50%;
+            /*opacity: 0;*/
+            position: absolute;
+            padding: 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="move">2</div>
+<script>
+    // 基础知识
+
+    var $move = $('#move');
+
+    // $move.velocity({opacity: 1});
+
+    // 参数
+    // 1 对象 css属性的期望值
+    // 2 对象 指定动画选项
+    // $move.velocity({width: 200, height: 200, opacity: 1}, {duration: 400, easing: 'swing'});
+
+    // 第二个参数不传对象
+
+    // 动画持续时间 1000 毫秒 默认缓动类型 'swing'
+    // $move.velocity({width: 200, height: 200, opacity: 1}, 1000);
+
+    // 持续时间 1000 毫秒 缓动类型 'ease-in-out'
+    // $move.velocity({top: 50}, 1000, 'ease-in-out');
+
+    // 默认持续时间 400 毫秒，缓动类型 'ease-out'
+    // $move.velocity({left: 50}, 'ease-out');
+
+    // 执行完毕回调
+    // $move.velocity({top: 0}, 200, function () {
+    //     console.log('complete');
+    // });
+
+    // 属性
+    // 将复合属性，拆分为他们的子属性
+
+    // $move.velocity({padding: 50});
+    // $move.velocity({paddingLeft: 50});
+
+    // 值
+    // 单位指定
+    // $move.velocity({
+    //     // top: 50, // 默认 px
+    //     // left: '50%', // 手动指Z
+    //     // rotateZ: 25, // 默认 deg
+    // }, 1000);
+
+    // v2
+    $move.velocity({
+        transform: ["scale(1.5)", 'scale(1)']
+    }, 1000);
+
+
+</script>
+</body>
+</html>
