@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>01</title>
     <script src="js/jquery-3.4.1.js"></script>
-    <!--    <script src="./js/velocity.min.js"></script>-->
-    <!--    <script src="./js/velocity.ui.js"></script>-->
-    <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.ui.min.js"></script>
+    <script src="./js/velocity.min.js"></script>
+    <script src="./js/velocity.ui.js"></script>
+    <!--    <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.min.js"></script>-->
+    <!--    <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.ui.min.js"></script>-->
     <!--    <script src="https://julian.com/research/velocity/vmd.min.js"></script>-->
     <style>
         #move {
@@ -20,14 +20,28 @@
             padding: 0;
             text-align: center;
         }
+
+        #move1 {
+            width: 100px;
+            height: 100px;
+            background: red;
+            border-radius: 50%;
+            /*opacity: 0;*/
+            position: absolute;
+            padding: 0;
+            text-align: center;
+            top: 150px;
+        }
     </style>
 </head>
 <body>
 <div id="move">2</div>
+<div id="move1">2</div>
 <script>
     // 基础知识
 
     var $move = $('#move');
+    var $move1 = $('#move1');
 
     // $move.velocity({opacity: 1});
 
@@ -66,11 +80,32 @@
     //     // rotateZ: 25, // 默认 deg
     // }, 1000);
 
-    // v2
-    $move.velocity({
-        transform: ["scale(1.5)", 'scale(1)']
-    }, 1000);
+    // v2 版本的
+    // $move.velocity({
+    //     transform: ["scale(1.5)", 'scale(1)']
+    // }, 1000);
 
+    // 链式调用
+    // $move
+    //     .velocity({width: 200})
+    //     .velocity({height: 200});
+
+    // easing 缓动
+
+    // 三角函数缓动
+    // $move.velocity({width: 200}, 'easeInOutSine');
+
+    // css 缓动
+    // $move.velocity({left: 500}, 'ease');
+    // $move1.velocity({left: 500}, 'ease-in-out');
+
+    // 贝塞尔曲线缓动
+    // $move.velocity({left: 500}, 500, [0.17, 0.67, 0.83, 0.67]);
+    // $move1.velocity({left: 500}, 500, [.42, 0, .58, 1]);
+
+    // 弹簧物理 [张力，摩擦力]
+    $move.velocity({left: 500}, 1000, [250, 20]);
+    $move1.velocity({left: 500}, 1000, [500, 25]);
 
 </script>
 </body>
