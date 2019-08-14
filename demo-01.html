@@ -19,6 +19,7 @@
             position: absolute;
             padding: 0;
             text-align: center;
+            overflow-y: auto;
         }
 
         #move1 {
@@ -35,7 +36,23 @@
     </style>
 </head>
 <body>
-<div id="move">2</div>
+<div id="move">2 width: 100px;
+    height: 100px;
+    background: red;
+    border-radius: 50%;
+    /*opacity: 0;*/
+    position: absolute;
+    padding: 0;
+    text-align: center;
+    top: 150px;width: 100px;
+    height: 100px;
+    background: red;
+    border-radius: 50%;
+    /*opacity: 0;*/
+    position: absolute;
+    padding: 0;
+    text-align: center;
+    top: 150px;</div>
 <div id="move1">2</div>
 <script>
     // 基础知识
@@ -104,8 +121,82 @@
     // $move1.velocity({left: 500}, 500, [.42, 0, .58, 1]);
 
     // 弹簧物理 [张力，摩擦力]
-    $move.velocity({left: 500}, 1000, [250, 20]);
-    $move1.velocity({left: 500}, 1000, [500, 25]);
+    // $move.velocity({left: 500}, 1000, [250, 20]);
+    // $move1.velocity({left: 500}, 1000, [500, 25]);
+
+
+    // begin 开始 complete 完成
+
+    // $move.velocity({left: 500}, {
+    //     easing: [250, 15],
+    //     duration: 1000,
+    //     begin: function () {
+    //         console.log('--- 动画开始 ---')
+    //     },
+    //     complete: function () {
+    //         console.log('--- 动画结束 ---')
+    //     }
+    // });
+
+    // loop 循环
+
+    // 循环两次
+    // $move.velocity({left: 500}, {
+    //     easing: [250, 15],
+    //     duration: 1000,
+    //     loop: 2
+    // });
+
+    // 无限循环
+    // $move.velocity({left: 500}, {
+    //     easing: [250, 15],
+    //     duration: 1000,
+    //     loop: true
+    // });
+
+    // delay 延迟
+
+    // 延迟 500毫秒 执行
+    // $move.velocity({left: 500}, {
+    //     easing: [250, 15],
+    //     duration: 1000,
+    //     delay: 500,
+    // });
+
+    // 每次循环停顿 200 毫秒
+    // $move.velocity({left: 500}, {
+    //     easing: [250, 15],
+    //     duration: 1000,
+    //     delay: 500,
+    //     loop: 3
+    // });
+
+    // display（显示）和 visibility（可见性）
+
+    // display
+    // $move.velocity({left: 500}, {
+    //     easing: [250, 15],
+    //     duration: 1000,
+    //     display: 'none'
+    // });
+
+    // hidden
+    // $move.velocity({left: 500}, {
+    //     easing: [250, 15],
+    //     duration: 1000,
+    //     visibility: 'hidden'
+    // });
+
+    // 其它功能
+
+    // 滚动 scrollTop scrollLeft
+    // $move.velocity({
+    //     scrollTop: '100%'
+    // }, {
+    //     easing: [250, 15],
+    //     duration: 1000
+    // });
+
 
 </script>
 </body>
