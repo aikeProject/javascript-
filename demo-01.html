@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <title>01</title>
     <script src="js/jquery-3.4.1.js"></script>
-    <script src="./js/velocity.min.js"></script>
-    <script src="./js/velocity.ui.js"></script>
-    <!--    <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.min.js"></script>-->
-    <!--    <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.ui.min.js"></script>-->
-    <!--    <script src="https://julian.com/research/velocity/vmd.min.js"></script>-->
+    <!--    <script src="./js/velocity.min.js"></script>-->
+    <!--    <script src="./js/velocity.ui.js"></script>-->
+    <!--        <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.min.js"></script>-->
+    <!--        <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.ui.min.js"></script>-->
+
+
+    <script src="node_modules/velocity-animate/velocity.js"></script>
+    <script src="node_modules/velocity-animate/velocity.ui.js"></script>
+
     <style>
         #move {
             width: 100px;
@@ -19,7 +23,7 @@
             position: absolute;
             padding: 0;
             text-align: center;
-            overflow-y: auto;
+            overflow-y: scroll;
         }
 
         #move1 {
@@ -32,6 +36,17 @@
             padding: 0;
             text-align: center;
             top: 150px;
+        }
+
+        #move2 {
+            width: 100px;
+            height: 100px;
+            background: red;
+            border-radius: 50%;
+            position: absolute;
+            padding: 0;
+            text-align: center;
+            top: 2000px;
         }
     </style>
 </head>
@@ -52,11 +67,13 @@
     position: absolute;
     padding: 0;
     text-align: center;
-    top: 150px;</div>
+    top: 150px;
+</div>
 <div id="move1">2</div>
+<div id="move2">3</div>
+<!--<script src="https://julian.com/research/velocity/vmd.min.js"></script>-->
 <script>
     // 基础知识
-
     var $move = $('#move');
     var $move1 = $('#move1');
 
@@ -92,9 +109,9 @@
     // 值
     // 单位指定
     // $move.velocity({
-    //     // top: 50, // 默认 px
-    //     // left: '50%', // 手动指Z
-    //     // rotateZ: 25, // 默认 deg
+    //     top: 50, // 默认 px
+    //     left: '50%', // 手动指Z
+    //     rotateZ: 25, // 默认 deg
     // }, 1000);
 
     // v2 版本的
@@ -110,7 +127,8 @@
     // easing 缓动
 
     // 三角函数缓动
-    // $move.velocity({width: 200}, 'easeInOutSine');
+    // $move.velocity({width: 500}, 1000, 'easeInCirc');
+    // $move.velocity({width: 500}, 'easeOutBounce');
 
     // css 缓动
     // $move.velocity({left: 500}, 'ease');
@@ -190,6 +208,21 @@
     // 其它功能
 
     // 滚动 scrollTop scrollLeft
+
+    // v1
+    // $move.velocity('scroll', {
+    //     // easing: 'spring',
+    //     container: $move,
+    //     duration: 1000,
+    //     offset: "200px"
+    // });
+
+    // $('#move2').velocity('scroll', {
+    //     duration: 1000,
+    //     easing: 'spring'
+    // });
+
+    // v2
     // $move.velocity({
     //     scrollTop: '100%'
     // }, {
@@ -197,6 +230,132 @@
     //     duration: 1000
     // });
 
+    // color 颜色
+
+    // $move.velocity({
+    // backgroundColor: ,
+    // backgroundColor: ["#ccc", '#fff'],
+    // color: '#ccc'
+    // });
+
+    // transform 变换
+
+    // scale 缩放
+    // $move.velocity({
+    //     transform: ["scale(1.5)", 'scale(1)']
+    // }, 1000);
+
+    // rotate 旋转
+    // $move.velocity({
+    //     transform: ["rotateZ(150deg)", "rotateZ(0)"]
+    // }, 1000);
+
+    // translate 平移
+    // $move.velocity({
+    //     transform: ["translateX(500px)", "translateX(0)"]
+    // }, 1000);
+
+
+    // 不使用 Jquery
+    // var move = document.getElementById('move');
+
+    // 1
+    // Velocity(move, {
+    //     transform: ["translateX(500px)", "translateX(0)"]
+    // }, 1000);
+
+    // 2
+    // move.velocity({
+    //     transform: ["translateX(500px)", "translateX(0)"]
+    // }, 1000);
+
+    // 使用  animate.css 效果
+    // move.velocity('zoomOutUp', {
+    //     duration: 1000
+    // });
+
+    /*
+    * 动画工作流
+    * */
+
+    // 淡入效果
+    // var fadeIn = {
+    //     // 属性
+    //     p: {
+    //         opacity: 1,
+    //         top: '50px'
+    //     },
+    //     // 选项
+    //     o: {
+    //         duration: 1000,
+    //         easing: 'linear'
+    //     }
+    // };
+
+    // 淡入
+    // $move.velocity(fadeIn.p, fadeIn.o);
+
+    // 组织排序动画
+    // velocity.ui.js 需要 ui pack 插件支持
+
+    // 设置不同元素的动画 一般做法
+
+    // $move.velocity({
+    //     transform: ["translateX(500px)", "translateX(0)"]
+    // }, function () {
+    //     $move1.velocity({
+    //         transform: ["translateX(500px)", "translateX(0)"]
+    //     }, function () {
+    //
+    //     });
+    // });
+
+    // 优化做法
+
+    // $.Velocity.RunSequence([
+    //     {
+    //         elements: $move,
+    //         properties: {
+    //             translateX: 500
+    //         },
+    //         options: {duration: 1000}
+    //     },
+    //     {
+    //         elements: $move1,
+    //         properties: {
+    //             translateX: 500
+    //         },
+    //         options: {duration: 1000}
+    //     }
+    // ]);
+
+    // $move.velocity("callout.bounce");
+
+    // 打包效果
+
+    // 名称后缀
+    // In结尾 自动淡入 （opacity 0 -> 1）
+    // Out结尾 动画结束后，将元素display设置为none
+
+    // $.Velocity.RegisterEffect('shadowIn', {
+    //     defaultDuration: 1000,
+    //     calls: [
+    //         [{opacity: 1, scale: 1}, 0.4],
+    //         [{boxShadowBlur: 50}, .6]
+    //     ]
+    // }).RegisterEffect('shadowOut', {
+    //     defaultDuration: 1000,
+    //     calls: [
+    //         [{boxShadowBlur: 50}, .8],
+    //         [{opacity: 0, scale: 0}, 0.8],
+    //     ],
+    //     reset: {
+    //         opacity: 1
+    //     }
+    // });
+    //
+    // $move.velocity('shadowIn');
+    // $move.velocity('shadowOut');
 
 </script>
 </body>
