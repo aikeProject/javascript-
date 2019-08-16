@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文本动画</title>
+    <!--    <script src="js/jquery-3.4.1.js"></script>-->
+</head>
+<body>
+<!--<div>-->
+<!--    Hello Wold-->
+<!--</div>-->
+
+<div>
+    Blast.js separates text in order to facilitate typographic manipulation. It has four delimiters built in: character,
+    word, sentence, and element. Alternatively, Blast can match custom regular expressions and phrases.
+</div>
+
+<!--<div>-->
+<!--    Current status: paused-->
+<!--</div>-->
+
+<script src="https://julian.com/research/velocity/vmd.min.js"></script>
+<script src="js/jquery.blast.js"></script>
+<script>
+    // 使用 blast.js
+    // 作用：将文本拆成字符、单词和句子
+    // blast.js 有三种分隔符（delimiter）类型，
+    // 字符 character
+    // 单词 word
+    // 句子 sentence
+
+    // $('div').blast({delimiter: 'word'});
+
+    // =>
+    /*
+     <div aria-label="Hello world" class="blast-root" style="">
+        <span class="blast" aria-hidden="true" style="">Hello</span>
+        <span class="blast" aria-hidden="true" style="">world</span>
+     </div>
+    * */
+
+    // $('div').blast({delimiter: 'character'});
+
+    /*
+     <div aria-label="Hello world" class="blast-root">
+        <span class="blast" aria-hidden="true">H</span>
+        <span class="blast" aria-hidden="true">e</span>
+        <span class="blast" aria-hidden="true">l</span>
+        <span class="blast" aria-hidden="true">l</span>
+        <span class="blast" aria-hidden="true">o</span>
+        <span class="blast" aria-hidden="true">w</span>
+        <span class="blast" aria-hidden="true">o</span>
+        <span class="blast" aria-hidden="true">r</span>
+        <span class="blast" aria-hidden="true">l</span>
+        <span class="blast" aria-hidden="true">d</span>
+    </div>
+    */
+
+    // $('div').blast({delimiter: 'sentence'});
+
+    /*
+    <div>
+    Blast.js separates text in order to facilitate typographic manipulation. It has four delimiters built in: character,
+    word, sentence, and element. Alternatively, Blast can match custom regular expressions and phrases.
+    </div>
+    */
+
+    // =>
+
+    /*
+   <div aria-label="
+    Blast.js separates text in order to facilitate typographic manipulation. It has four delimiters built in: character,
+    word, sentence, and element. Alternatively, Blast can match custom regular expressions and phrases." class="blast-root" style="">
+        <span class="blast" aria-hidden="true">Blast.js separates text in order to facilitate typographic manipulation.</span>
+        <span class="blast" aria-hidden="true">It has four delimiters built in: character,word, sentence, and element.</span>
+        <span class="blast" aria-hidden="true" style="">Alternatively, Blast can match custom regular expressions and phrases.</span>
+    </div>
+    */
+
+
+    // customClass (自定义类)
+
+    // $('div').blast({
+    //     delimiter: 'word',
+    //     customClass: 'my-class'
+    // });
+
+    // =>
+
+    /*
+    <div aria-label="Hello Wold" class="blast-root">
+        <span class="blast my-class" aria-hidden="true">Hello</span>
+        <span class="blast my-class" aria-hidden="true">Wold</span>
+    </div>
+    * */
+
+    // generateValueClass (生成值类)
+    // boolean
+    // 是否添加一个特有的类 （以 .blast-[delimiter]-[textValue]）
+    // 仅支持 character word
+
+    // $('div').blast({
+    //     delimiter: 'word',
+    //     generateValueClass: true
+    // });
+
+    // =>
+    /*
+    <div aria-label="Hello Wold" class="blast-root">
+        <span class="blast blast-word-hello" aria-hidden="true">Hello</span>
+        <span class="blast blast-word-wold" aria-hidden="true">Wold</span>
+    </div>
+    * */
+
+
+    // tag (标签)
+    // 用什么tag包装文本元素
+
+    // $('div').blast({
+    //     delimiter: 'word',
+    //     tag: 'div'
+    // });
+
+    // =>
+
+    /*
+    <div aria-label="Hello Wold" class="blast-root">
+        <div class="blast" aria-hidden="true">Hello</div>
+        <div class="blast" aria-hidden="true">Wold</div>
+    </div>
+    * */
+
+
+    // reverse (反转)
+    // 还原为原始的文本
+
+    // $('div').blast({
+    //     delimiter: 'word',
+    // });
+    //
+    // setTimeout(function () {
+    //     $('div').blast(false);
+    // }, 2000);
+
+
+    // 让文本过度进入视图或离开视图
+
+    // 替换已有文本
+    // $('div')
+    //     .html('This is our new message.')
+    //     .blast({
+    //         delimiter: 'word'
+    //     })
+    //     .css({opacity: 0})
+    //     .velocity({opacity: 1}, {duration: 2000});
+
+    // 错开动画
+    // $('div')
+    //     .html('This is our new message.')
+    //     .blast({
+    //         delimiter: 'word'
+    //     })
+    //     .css({opacity: 0})
+    //     .velocity('transition.fadeIn', {stagger: 500});
+
+    // 过度文本离开视图
+    // $('div').blast({delimiter: 'word'});
+    // $('div .blast').velocity(
+    //     'transition.fadeOut',
+    //     {
+    //         stagger: 50,
+    //         backwards: true,
+    //         complete: function () {
+    //             $('div')
+    //                 .html('This is our new message.')
+    //                 .blast({
+    //                     delimiter: 'word'
+    //                 })
+    //                 .css({opacity: 0})
+    //                 .velocity('transition.fadeIn', {stagger: 50});
+    //         }
+    //     }
+    // );
+
+    // 过度单个文本部分
+    // 以单词为分隔符拆分为div
+
+    /*
+    <div>
+        Current status: paused
+    </div>
+    * */
+    // $('div').blast({
+    //     delimiter: 'word'
+    // }).eq(2).velocity({opacity: 0}, function () {
+    //     $(this).text('running');
+    // }).velocity({opacity: 1});
+
+
+    // 华丽的过度文本
+    // 有些使用了3D变换，这些效果不能用于css中display为"inline"的元素
+    // 所以在动画之前，先将元素 display 设置为 'inline-block'
+    // $('div').blast({delimiter: 'word'});
+    // $('div .blast')
+    //     .css({display: 'inline-block'})
+    //     .velocity(
+    //         'transition.perspectiveDownOut',
+    //         {
+    //             stagger: 50,
+    //             backwards: true,
+    //             complete: function () {
+    //                 $('div')
+    //                     .html('This is our new message.')
+    //                     .blast({delimiter: 'word'})
+    //                     .css({opacity: 0, display: 'inline-block'})
+    //                     .velocity('transition.perspectiveDownIn', {stagger: 50});
+    //             }
+    //         }
+    //     );
+
+
+    // 文字修饰
+    // $('div').blast({delimiter: 'character'}).each(function (i, element) {
+    //     var opacity = 1 - i / 200;
+    //
+    //     element.style.opacity = opacity;
+    // });
+</script>
+</body>
+</html>
