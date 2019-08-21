@@ -3,8 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>SVG</title>
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="node_modules/velocity-animate/velocity.js"></script>
+    <script src="node_modules/velocity-animate/velocity.ui.js"></script>
 </head>
 <body>
+<!--<svg width="500" height="500">-->
+<!--    <circle cx="100" cy="100" r="30" style="fill: blue;"></circle>-->
+<!--    <rect id="rect" x="100" y="100" width="200" height="200" style="full: green; stroke: red;"></rect>-->
+<!--</svg>-->
 
+<svg version="1.2" width="500" height="500" xmlns="http://www.w3.org/2000/svg">
+    <circle id="circleLeft" cx="100" cy="100" r="30" style="fill: red;"></circle>
+    <circle id="circleRight" cx="100" cy="100" r="30" style="fill: orange;"></circle>
+</svg>
+
+<script>
+    $('#circleLeft').velocity({cx: '-=15px'}, {easing: 'spring'});
+    $('#circleRight').velocity({cx: '+=15px'}, {easing: 'spring'});
+
+    $('svg').on('mouseover mouseout', function () {
+        $('#circleLeft, #circleRight').velocity('reverse')
+    })
+</script>
 </body>
 </html>
